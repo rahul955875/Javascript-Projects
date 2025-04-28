@@ -2,6 +2,7 @@
 //1,splice - modify orginal array
 const arr = [1, 2, 3];
 const newarr = arr.splice(0, 2, "new"); // new --> returns array of deleted items
+console.log(arr)
 
 //slice - returns new array copy of orginal
 //concate - return new concated array , array like obj can be concated using [symbol.isConcatable] : true
@@ -49,7 +50,7 @@ const newarr = arr.splice(0, 2, "new"); // new --> returns array of deleted item
 //substr(start,lenth)
 
 //object
-Object.keys()
-Object.values()
-Object.entries()
-Object.fromEntries()
+// Object.keys()
+// Object.values()
+// Object.entries()
+// Object.fromEntries()
