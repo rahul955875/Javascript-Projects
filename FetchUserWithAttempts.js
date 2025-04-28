@@ -13,14 +13,16 @@ const getUser = (id) => {
 };
 
 const ids = [1, 2, 3, 4, 5];
-
-const retryFetch = async (id, attempts = 3) => {
+const wait = (ms)=> new Promise(res=>setTimeout(res,ms))
+const retryFetch = async (id, attempts = 3,delay =1000) => {
   try {
     const result = await getUser(id);
     return result;
   } catch (error) {
-    if (attempts > 1) {
-      return retryFetch(id, attempts - 1);
+    if (attempts > 0) {
+        console.log('Retrying user ',id , ' attempts left ' , attempts - 1)
+        await wait(delay)
+      return retryFetch(id, attempts - 1,delay*2);
     } else {
       return { id, name: "Unknown User" };
     }
