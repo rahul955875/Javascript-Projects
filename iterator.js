@@ -78,6 +78,9 @@ Number.prototype[Symbol.iterator] = function* (){
         yield current++
     }
 }
+
+
+
 // Number.prototype[Symbol.iterator] = function () {
 //   // console.log(Number(this))
 //   return this.toString()
@@ -90,3 +93,11 @@ Number.prototype[Symbol.iterator] = function* (){
 // for (const num of 10) {
 //   console.log(num);
 // }
+
+// const str = new String('hello')
+// for(const char of str){
+//     console.log(char)
+// }
+
+
+// ;[1,2,3].forEach((i)=>console.log(i));
