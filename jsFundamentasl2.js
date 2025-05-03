@@ -98,4 +98,23 @@ const objTobeConvert = {
 // console.log(2*objTobeConvert)
 let a = 5
 // console.log(a.__proto__)
-console.log( +5..toFixed(5))
+// console.log( +5..toFixed(5))
+// console.log(bigInt)
+// console.log(isFinite(undefined))
+
+const nestedArr = [1,2,[[[3],4]],5]
+
+const sumOfArr = (arr)=>{
+    let sum = 0
+    for(let num of arr){
+        if(Array.isArray(num)){
+            sum += sumOfArr(num)
+        }else{
+            // console.log(num)
+            sum += num
+        }
+    }
+    return sum
+}
+
+console.log(sumOfArr(nestedArr))
