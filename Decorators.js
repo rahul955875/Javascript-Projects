@@ -105,3 +105,49 @@ function print(x) {
 // debouncePrint("hello2");
 // debouncePrint("hello3");
 
+// throttle decorator
+
+function throttle(func, ms) {
+  let isTrottle = false;
+  let savedThis;
+  let savedArgs;
+
+  return function wrapper(...args) {
+    if (isTrottle) {
+      savedArgs = args;
+      savedThis=this
+      return;
+    }
+    isTrottle = true;
+    func.apply(savedThis, args);
+    setTimeout(() => {
+      isTrottle = false;
+      if (savedArgs) {
+        wrapper.apply(savedThis, savedArgs);
+        savedArgs = null;
+        savedThis = this
+      }
+    }, ms);
+  };
+}
+function f(a) {
+  console.log(a);
+}
+
+// f1000 passes calls to f at maximum once per 1000 ms
+// let f1000 = throttle(f, 1000);
+
+// f1000(1); // shows 1
+// f1000(2); // (throttling, 1000ms not out yet)
+// f1000(3); // (throttling, 1000ms not out yet)
+// f1000(4); // (throttling, 1000ms not out yet)
+
+// let f1500 = throttle(f,1500)
+// f1500(10)
+// f1500(20)
+// f1500(30)
+// when 1000 ms time out...
+// ...outputs 3, intermediate value 2 was ignored
+
+// console.log(globalThis.this)
+// console.log(globalThis.throttle) no such thing

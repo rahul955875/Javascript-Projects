@@ -108,9 +108,38 @@ const printListUsingLoop = (list) => {
 //   return list;
 // };
 // console.log(makeList([1, 2, 3, 4]));
-const args = ()=>{
-    // console.log(arguments)
-    // takes form outer function
-}
+const args = () => {
+  // console.log(arguments)
+  // takes form outer function
+};
 // console.log(args)
 // args(1,2,3,4)
+
+// sum(0)(1)(2)(3)(4)(5)
+function arbitrarySum(a) {
+  let total = a;
+  return function sum(b) {
+    if (b) {
+      total += b;
+      return sum;
+    }
+    return total;
+  };
+}
+// console.log(arbitrarySum(0)(1)(2)(3)(4)(5)());
+
+// using custome property
+function sumUsingCustomPro(a) {
+  let total = a;
+  function sum(b) {
+    if (b) {
+      total += b;
+    }
+    return sum;
+  }
+  sum.valueOf = function () {
+    return total;
+  };
+  return sum;
+}
+console.log(+(sumUsingCustomPro(0)(1)(2)(3)(4)(5)));

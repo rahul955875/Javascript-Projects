@@ -141,3 +141,9 @@ chache1.setCache("3", "satyam");
 chache1.setCache("4", "Avadh");
 chache1.getCache("2");
 chache1.showCache();
+
+// let timer = setTimeout(function print(count){
+
+//   console.log(count++)
+//   timer = setTimeout(print, 1000,count);
+// },1000,0)
