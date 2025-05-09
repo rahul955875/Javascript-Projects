@@ -88,3 +88,104 @@ class Clock2 {
 
 // const newClock = new Clock2({ template: "h:m:s" });
 // newClock.start();
+
+
+//fix this code 
+let animal = {
+    name: "Animal",
+    eat() {
+      console.log(`${this.name} eats.`);
+    }
+  };
+  
+  let rabbit = {
+    __proto__: animal,
+    name : 'rabit',
+    // eat() {
+    //   // ...bounce around rabbit-style and call parent (animal) method
+    //   this.__proto__.eat.call(this); // (*)
+    // }
+  };
+  
+  let longEar = {
+    __proto__: rabbit,
+    name : 'longEar',
+    // eat() {
+    //   // ...do something with long ears and call parent (rabbit) method
+    //   this.__proto__.eat.call(this); // (**)
+    // }
+  };
+  
+//   longEar.eat(); 
+
+//! private and protected fields
+
+// class CoffeeMachine {
+//     _waterAmount = 0;
+  
+//     set waterAmount(value) {
+//       if (value < 0) {
+//         value = 0;
+//       }
+//       this._waterAmount = value;
+//     }
+  
+//     get waterAmount() {
+//       return this._waterAmount;
+//     }
+  
+//     constructor(power) {
+//       this._power = power;
+//     }
+  
+//   }
+  
+//   // create the coffee machine
+//   let coffeeMachine = new CoffeeMachine(100);
+  
+  // add water
+//   coffeeMachine._waterAmount = -10; 
+//   console.log(coffeeMachine.waterAmount)
+
+// !no setter
+// class CoffeeMachine {
+//     // ...
+  
+//     constructor(power) {
+//       this._power = power;
+//     }
+  
+//     get power() {
+//       return this._power;
+//     }
+  
+//   }
+  
+//   // create the coffee machine
+//   let coffeeMachine = new CoffeeMachine(100);
+  
+  
+//   coffeeMachine._power = 25; 
+//   console.log(`Power is: ${coffeeMachine.power}W`); // Power is: 100W
+
+
+// ! private properties #
+class CoffeeMachine {
+    #waterLimit = 200;
+  
+    #fixWaterAmount(value) {
+      if (value < 0) return 0;
+      if (value > this.#waterLimit) return this.#waterLimit;
+    }
+  
+    setWaterAmount(value) {
+      this.#waterLimit = this.#fixWaterAmount(value);
+    }
+  
+  }
+  
+  let coffeeMachine = new CoffeeMachine();
+  
+  // can't access privates from outside of the class
+//   CoffeeMachine.#fixWaterAmount(123); // Error
+//   CoffeeMachine.#waterLimit = 1000; //
