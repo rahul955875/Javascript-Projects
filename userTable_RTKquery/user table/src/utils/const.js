@@ -1,0 +1,1 @@
+export const USER_TABLE_FIELDS = ['ID','NAME','ACTIONS']

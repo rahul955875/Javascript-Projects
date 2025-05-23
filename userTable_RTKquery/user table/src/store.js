@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { fetchUserApi } from "./features/fetchUser";
+import { fetchUserApi } from "./features/fetchUserSlice";
 export const store = configureStore({
   reducer: {
     [fetchUserApi.reducerPath]: fetchUserApi.reducer,
