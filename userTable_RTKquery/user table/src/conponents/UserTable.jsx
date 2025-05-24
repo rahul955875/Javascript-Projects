@@ -58,7 +58,10 @@ const UserTable = () => {
   //   return errors;
   // }, []);
 
-  const handleSubmit = async (values, { setErrors, setFieldValue }) => {
+  const handleSubmit = async (
+    values,
+    { resetForm, setErrors, setFieldValue }
+  ) => {
     // e.preventDefault();
     if (isId) {
       await udpateUser({ id: isId, name: values.name });
@@ -67,8 +70,13 @@ const UserTable = () => {
       await addUser({ id: crypto.randomUUID(), name: values.name });
     }
     setIsOpen(false);
-    setFieldValue("name", "");
-    setErrors({ errors: {} });
+    // setFieldValue("name", "");
+    // setErrors({ errors: {} });
+    resetForm({
+      values: { name: "" },
+      errors: {},
+      touched: {},
+    });
   };
   const formik = useFormik({
     initialValues: {
