@@ -1,29 +1,59 @@
-import { Box, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import {
+  Box,
+  createTheme,
+  CssBaseline,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
 import "./App.css";
 import Nav from "./components/Nav";
 import { createBrowserRouter, Outlet } from "react-router-dom";
-import AddProduct from "./components/AddProduct";
-import ProductList from "./components/ProductList";
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
+import ErrorBoundry from "./components/ErrorBoundry";
+import ErrorElement from "./components/ErrorElement";
+
+const ProductList = lazy(() => import("./components/ProductList"));
+const AddProduct = lazy(() => import("./components/AddProduct"));
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorElement />,
     children: [
       {
         path: "/",
-        element: <ProductList />,
+        element: (
+          <Suspense
+            fallback={
+              <Typography variant="h2" sx={{ textAlign: "center" }}>
+                Loading...
+              </Typography>
+            }
+          >
+            <ProductList />
+          </Suspense>
+        ),
       },
       {
         path: "/create-products",
-        element: <AddProduct />,
+        element: (
+          <Suspense
+            fallback={
+              <Typography variant="h2" sx={{ textAlign: "center" }}>
+                Loading...
+              </Typography>
+            }
+          >
+            <AddProduct />
+          </Suspense>
+        ),
       },
     ],
   },
 ]);
 function App() {
-  const [isDark, setIsDark] = useState(localStorage.getItem('mode')|| false);
+  const [isDark, setIsDark] = useState(localStorage.getItem("mode") || false);
   const darkTheme = createTheme({
     palette: {
       mode: isDark ? "dark" : "light",
@@ -35,7 +65,9 @@ function App() {
       <CssBaseline />
       <Nav dark={[isDark, setIsDark]} />
       <Box sx={{ px: 2, py: 1 }}>
-        <Outlet />
+        <ErrorBoundry>
+          <Outlet />
+        </ErrorBoundry>
       </Box>
     </ThemeProvider>
   );
