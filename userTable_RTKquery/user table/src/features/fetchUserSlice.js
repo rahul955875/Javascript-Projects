@@ -10,7 +10,7 @@ export const fetchUserApi = createApi({
       transformResponse: (res) => res.reverse(),
     }),
     addUser: build.mutation({
-      query: (user) => ({
+      query:(user) => ({
         url: `/`,
         method: "POST",
         body: user,
